@@ -57,8 +57,10 @@ def add_ohlcv(base_path: str, kospi_daily: pd.DataFrame, kosdaq_daily: pd.DataFr
                                                            todate=datetime.now().strftime('%Y%m%d'),
                                                            ticker=ticker,
                                                            adjusted=False)
-                with gzip.open(file_path, ' wb') as f:
-                    _pickle.dump(temp_data.drop('거래대금', axis=1, inplace=True), f)
+                temp_data.drop('거래대금', axis=1, inplace=True)
+                with gzip.open(file_path, 'wb') as f:
+                    _pickle.dump(temp_data, f)
+                    print(f'init_{ticker}')
                     sleep(2)
 
 
