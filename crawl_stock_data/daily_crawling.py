@@ -57,9 +57,9 @@ def add_ohlcv(base_path: str, kospi_daily: pd.DataFrame, kosdaq_daily: pd.DataFr
                                                            todate=datetime.now().strftime('%Y%m%d'),
                                                            ticker=ticker,
                                                            adjusted=False)
-            with gzip.open(file_path, ' wb') as f:
-                _pickle.dump(temp_data.drop('거래대금', axis=1, inplace=True), f)
-                sleep(2)
+                with gzip.open(file_path, ' wb') as f:
+                    _pickle.dump(temp_data.drop('거래대금', axis=1, inplace=True), f)
+                    sleep(2)
 
 
 def daily_trading() -> (pd.DataFrame, pd.DataFrame, pd.DataFrame):
