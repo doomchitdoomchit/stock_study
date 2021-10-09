@@ -6,8 +6,10 @@ import _pickle
 import gzip
 from time import sleep
 import numpy as np
+from .logging_deco import LogWriter
 
 
+@LogWriter
 def daily_ohlcv() -> (pd.DataFrame, pd.DataFrame):
     """
     오늘 주식내용 크롤링
@@ -19,6 +21,7 @@ def daily_ohlcv() -> (pd.DataFrame, pd.DataFrame):
     return kospi_daily, kosdaq_daily
 
 
+@LogWriter
 def check_today_open() -> bool:
     """
     오늘 장이 열리는지 확인
@@ -29,6 +32,7 @@ def check_today_open() -> bool:
     return XKRX.is_session(datetime.now().strftime('%Y-%m-%d'))
 
 
+@LogWriter
 def add_ohlcv(base_path: str, kospi_daily: pd.DataFrame, kosdaq_daily: pd.DataFrame) -> None:
     """
     데이터 추가
@@ -64,6 +68,7 @@ def add_ohlcv(base_path: str, kospi_daily: pd.DataFrame, kosdaq_daily: pd.DataFr
                     sleep(2)
 
 
+@LogWriter
 def daily_trading() -> (pd.DataFrame, pd.DataFrame, pd.DataFrame):
     """
     일일 거래금과 거래량 받기
@@ -79,6 +84,7 @@ def daily_trading() -> (pd.DataFrame, pd.DataFrame, pd.DataFrame):
     return trading_foreigner, trading_personal, trading_agencysum
 
 
+@LogWriter
 def init_trading_value(ticker: str) -> pd.DataFrame:
     """
     거래대금 구하기
@@ -101,6 +107,7 @@ def init_trading_value(ticker: str) -> pd.DataFrame:
     return init_data
 
 
+@LogWriter
 def init_trading_volume(ticker: str) -> pd.DataFrame:
     """
     거래량 구하기
@@ -123,6 +130,7 @@ def init_trading_volume(ticker: str) -> pd.DataFrame:
     return init_data
 
 
+@LogWriter
 def add_trading(base_path: str,
                 trading_foreigner: pd.DataFrame,
                 trading_personal: pd.DataFrame,
